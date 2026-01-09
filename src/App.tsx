@@ -1,4 +1,4 @@
-import { todosAtom, addTodoAtom, deleteTodoAtom } from "./store/todoStore";
+import { todosAtom, addTodoAtom, deleteTodoAtom, updateTodoAtom } from "./store/todoStore";
 import { useAtomValue, useSetAtom } from "jotai";
 
 
@@ -6,19 +6,28 @@ function App() {
 
   const todos = useAtomValue(todosAtom);
   const addTodo = useSetAtom(addTodoAtom);
-  const deleteTodo = useSetAtom(deleteTodoAtom)
+  const deleteTodo = useSetAtom(deleteTodoAtom);
+  const updateTodo = useSetAtom(updateTodoAtom);
 
   const handleAddTodo = () => {
     const neueTodo = document.getElementById("inputFeld") as HTMLInputElement;
-    if(neueTodo) {
+    if (neueTodo) {
       const todoText: string = neueTodo.value;
       addTodo(todoText);
     }
   }
 
-  const handleDeleteTodo = () => {
-    deleteTodo(1);
+  const handleUpdateTodo = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as Element;
+    const id = target.id;
+    updateTodo(parseInt(id))
   }
+
+  const handleDeleteTodo = (e: React.MouseEvent<HTMLElement>) => {
+    const target = e.target as Element;
+    const id = target.id;
+    deleteTodo(parseInt(id));
+  };
 
   return (
     <div>
@@ -26,9 +35,11 @@ function App() {
       <button type="button" onClick={handleAddTodo}>hinzufügen</button>
       {todos.map((todo) => (
         <>
-          <div>{todo.text}</div>
           <div>Id: {todo.id}</div>
-          <button type="button" onClick={handleDeleteTodo}>entfernen</button>
+          <div>{todo.text}</div>
+          <input type="text" placeholder="bearbeiten" />
+          <button type="button" onClick={handleUpdateTodo} id={`${todo.id}`}>bearbeiten</button>
+          <button type="button" onClick={handleDeleteTodo} id={`${todo.id}`}>entfernen</button>
         </>
       ))}
     </div>
