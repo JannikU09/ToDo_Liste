@@ -8,13 +8,23 @@ function App() {
   const addTodo = useSetAtom(addTodoAtom);
 
   const handleAddTodo = () => {
-    addTodo("raus gehen");
+    const neueTodo = document.getElementById("inputFeld") as HTMLInputElement;
+    if(neueTodo) {
+      const todoText: string = neueTodo.value;
+      addTodo(todoText);
+    }
   }
 
   return (
     <div>
-      <button type="button" onClick={handleAddTodo}>button</button>
-      {todos.map((todo) => (<div>{todo.text}</div>))}
+      <input type="text" placeholder="test" id="inputFeld" />
+      <button type="button" onClick={handleAddTodo}>hinzufügen</button>
+      {todos.map((todo) => (
+        <>
+          <div>{todo.text}</div>
+          <div>Id: {todo.id}</div>
+        </>
+      ))}
     </div>
   )
 }
