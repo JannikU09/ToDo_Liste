@@ -33,5 +33,10 @@ export const updateTodoAtom = atom(
 
 
 export const deleteTodoAtom = atom(
-
-)
+    null,
+    (get, set, id: number) => {
+        const todos = get(todosAtom);
+        const deleted = todos.filter(todo => todo.id !== id);
+        set(todosAtom, deleted);
+    }
+);
