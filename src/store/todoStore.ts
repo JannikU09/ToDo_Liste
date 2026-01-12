@@ -12,23 +12,26 @@ export const addTodoAtom = atom(
     null,
     (get, set, text: string) => {
 
-        const todoListe = get(todosAtom);
-        const neueId = todoListe.length + 1;
-
+        const id = Date.now();
         const todo: ToDo = {
-            id: neueId,
+            id,
             text,
             isChecked: false,
         };
 
-        set(todosAtom, [...get(todosAtom), todo])
+        set(todosAtom, [...get(todosAtom), todo]);
     }
-
-
 );
 
 export const updateTodoAtom = atom(
+    null,
+    (get, set, text: string, id: number) => {
 
+        const todos = get(todosAtom);
+        const updatedTodos = todos.map(todo => todo.id === id ? { ...todo, text} : todo);
+
+        set(todosAtom, updatedTodos);
+    }
 );
 
 
