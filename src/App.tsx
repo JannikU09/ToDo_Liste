@@ -13,11 +13,11 @@ function App() {
 
   const handleAddTodo = () => {
 
-    const neueTodo = document.getElementById("inputFeld") as HTMLInputElement;
-    if (neueTodo) {
-      const todoText: string = neueTodo.value;
+    const newTodo = document.getElementById("inputFeld") as HTMLInputElement;
+    if (newTodo) {
+      const todoText: string = newTodo.value;
       addTodo(todoText);
-      neueTodo.value = "";
+      newTodo.value = "";
     }
   };
 
@@ -25,10 +25,10 @@ function App() {
 
     const id = Number((event.target as HTMLElement).id);
     console.log(id);
-    const bearbeiteteTodo = document.getElementById(`updateText-${todo.id}`) as HTMLInputElement;
-    const updatedText = bearbeiteteTodo.value;
+    const editedTodo = document.getElementById(`updateText-${todo.id}`) as HTMLInputElement;
+    const updatedText = editedTodo.value;
     updateTodo({ id, text: updatedText, isChecked });
-    bearbeiteteTodo.value = "";
+    editedTodo.value = "";
   };
 
 
