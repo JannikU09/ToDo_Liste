@@ -25,10 +25,10 @@ export const addTodoAtom = atom(
 
 export const updateTodoAtom = atom(
     null,
-    (get, set, text: string, id: number) => {
+    (get, set, updatedTodo: ToDo) => {
 
         const todos = get(todosAtom);
-        const updatedTodos = todos.map(todo => todo.id === id ? { ...todo, text} : todo);
+        const updatedTodos = todos.map((todo) => todo.id === updatedTodo.id ? updatedTodo : todo);
 
         set(todosAtom, updatedTodos);
     }
