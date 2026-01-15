@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { todosAtom, addTodoAtom, deleteTodoAtom, updateTodoAtom } from "./store/todoStore";
+import { todosAtom, addTodoAtom, deleteTodoAtom, updateTodoAtom, type ToDo } from "./store/todoStore";
 import { useAtomValue, useSetAtom } from "jotai";
 
 
@@ -12,49 +12,59 @@ function App() {
   const [isChecked, setIsChecked] = useState(false);
 
   const handleAddTodo = () => {
+
     const neueTodo = document.getElementById("inputFeld") as HTMLInputElement;
     if (neueTodo) {
       const todoText: string = neueTodo.value;
       addTodo(todoText);
+      neueTodo.value = "";
     }
   };
 
-  const handleUpdateTodo = (event: React.MouseEvent<HTMLElement>) => {
-    const bearbeiteteTodo = document.getElementById("updateText") as HTMLInputElement;
-    todos.map((todo) => todo.text = bearbeiteteTodo.value)
-    const upgedatedTodo: string = bearbeiteteTodo.value;
-    const target = event.target as Element;
-    const id = target.id;
-    updateTodo(upgedatedTodo, parseInt(id));
+  const handleUpdateTodo = (event: React.MouseEvent<HTMLElement>, todo: ToDo) => {
+
+    const id = Number((event.target as HTMLElement).id);
+    console.log(id);
+    const bearbeiteteTodo = document.getElementById(`updateText-${todo.id}`) as HTMLInputElement;
+    const updatedText = bearbeiteteTodo.value;
+    updateTodo({ id, text: updatedText, isChecked });
+    bearbeiteteTodo.value = "";
   };
 
 
   const handleDeleteTodo = (event: React.MouseEvent<HTMLElement>) => {
-    const target = event.target as Element;
-    const id = target.id;
+
+    const id = Number((event.target as HTMLElement).id);
     console.log(id);
-    deleteTodo(parseInt(id));
+    deleteTodo(id);
   };
 
-  const handleCheckedTodo = () => {
+  const handleCheckedTodo = (event: React.MouseEvent<HTMLElement>, todo: ToDo) => {
+
+    const id = Number((event.target as HTMLElement).id);
+    console.log(id);
     setIsChecked(!isChecked);
-  }
+    updateTodo({ id: todo.id, isChecked: isChecked, text: todo.text });
+    console.log(todo);
+  };
 
   return (
     <div>
       <input type="text" placeholder="Neue ToDo" id="inputFeld" />
       <button type="button" onClick={handleAddTodo}>Hinzufügen</button>
       {todos.map((todo) => (
-        <>
+
+        <li key={todo.id}>
           <div />
-          <input type="checkbox" id="checkbox" checked={isChecked} onChange={handleCheckedTodo} />
-          <label htmlFor="checkbox" id="textTodo" style={{ textDecoration: isChecked ? "line-through" : "none" }}>{todo.text}</label>
+          <input type="checkbox" id={`${todo.id}`} onClick={(event) => handleCheckedTodo(event, todo)} />
+          <label htmlFor={`${todo.id}`} id="textTodo" style={{ textDecoration: isChecked ? "line-through" : "none" }}>{todo.text}</label>
           <div>Id: {todo.id}</div>
           <div />
-          <input type="text" placeholder={todo.text} id="updateText" />
-          <button type="button" onClick={handleUpdateTodo}>bearbeiten</button>
+          <input type="text" placeholder={todo.text} id={`updateText-${todo.id}`} />
+          <button type="button" onClick={(event) => handleUpdateTodo(event, todo)} id={`${todo.id}`}>bearbeiten</button>
           <button type="button" onClick={handleDeleteTodo} id={`${todo.id}`}>löschen</button>
-        </>
+        </li>
+
       ))}
     </div>
   )
