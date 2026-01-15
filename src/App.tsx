@@ -55,11 +55,9 @@ function App() {
       {todos.map((todo) => (
 
         <li key={todo.id}>
-          <div />
           <input type="checkbox" id={`${todo.id}`} onClick={(event) => handleCheckedTodo(event, todo)} />
           <label htmlFor={`${todo.id}`} id="textTodo" style={{ textDecoration: isChecked ? "line-through" : "none" }}>{todo.text}</label>
           <div>Id: {todo.id}</div>
-          <div />
           <input type="text" placeholder={todo.text} id={`updateText-${todo.id}`} />
           <button type="button" onClick={(event) => handleUpdateTodo(event, todo)} id={`${todo.id}`}>bearbeiten</button>
           <button type="button" onClick={handleDeleteTodo} id={`${todo.id}`}>löschen</button>
