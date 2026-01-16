@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { todosAtom, addTodoAtom, deleteTodoAtom, updateTodoAtom, type ToDo } from "./store/todoStore";
 import { useAtomValue, useSetAtom } from "jotai";
+import "./App.css"
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const deleteTodo = useSetAtom(deleteTodoAtom);
   const updateTodo = useSetAtom(updateTodoAtom);
   const [isChecked, setIsChecked] = useState(false);
+  const [inputUpdate, setInputUpdate] = useState("");
 
   const handleAddTodo = () => {
 
@@ -21,14 +23,24 @@ function App() {
     }
   };
 
-  const handleUpdateTodo = (event: React.MouseEvent<HTMLElement>, todo: ToDo) => {
 
-    const id = Number((event.target as HTMLElement).id);
-    console.log(id);
-    const editedTodo = document.getElementById(`updateText-${todo.id}`) as HTMLInputElement;
-    const updatedText = editedTodo.value;
-    updateTodo({ id, text: updatedText, isChecked });
-    editedTodo.value = "";
+  const handleChangeUpdate = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+
+    setInputUpdate(event.target.value);
+  };
+
+  const handleSubmitUpdate = (event: React.KeyboardEvent<HTMLFormElement>, todo: ToDo) => {
+
+    if (event.key === "Enter" && inputUpdate !== "") {
+
+      event.preventDefault();
+      setInputUpdate("");
+
+      updateTodo({
+        ...todo,
+        text: inputUpdate
+      });
+    };
   };
 
 
@@ -58,8 +70,15 @@ function App() {
           <input type="checkbox" id={`${todo.id}`} onClick={(event) => handleCheckedTodo(event, todo)} />
           <label htmlFor={`${todo.id}`} id="textTodo" style={{ textDecoration: isChecked ? "line-through" : "none" }}>{todo.text}</label>
           <div>Id: {todo.id}</div>
-          <input type="text" placeholder={todo.text} id={`updateText-${todo.id}`} />
-          <button type="button" onClick={(event) => handleUpdateTodo(event, todo)} id={`${todo.id}`}>bearbeiten</button>
+
+          <form onKeyDown={(event) => handleSubmitUpdate(event, todo)}>
+
+            <textarea
+              placeholder={todo.text}
+              onChange={handleChangeUpdate}
+              className="updateInput"
+            />
+          </form>
           <button type="button" onClick={handleDeleteTodo} id={`${todo.id}`}>löschen</button>
         </li>
 
