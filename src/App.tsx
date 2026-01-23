@@ -10,7 +10,6 @@ function App() {
   const addTodo = useSetAtom(addTodoAtom);
   const deleteTodo = useSetAtom(deleteTodoAtom);
   const updateTodo = useSetAtom(updateTodoAtom);
-  const [isChecked, setIsChecked] = useState(false);
   const [inputUpdate, setInputUpdate] = useState("");
 
   const handleAddTodo = () => {
@@ -55,8 +54,10 @@ function App() {
 
     const id = Number((event.target as HTMLElement).id);
     console.log(id);
-    setIsChecked(!isChecked);
-    updateTodo({ id: todo.id, isChecked: isChecked, text: todo.text });
+    updateTodo({
+      ...todo,
+      isChecked: !todo.isChecked,
+    });
     console.log(todo);
   };
 
@@ -68,12 +69,13 @@ function App() {
 
         <li key={todo.id}>
           <input type="checkbox" id={`${todo.id}`} onClick={(event) => handleCheckedTodo(event, todo)} />
-          <label htmlFor={`${todo.id}`} id="textTodo" style={{ textDecoration: isChecked ? "line-through" : "none" }}>{todo.text}</label>
+          <label htmlFor={`${todo.id}`} id="textTodo" style={{ textDecoration: todo.isChecked ? "line-through" : "none" }}>{todo.text}</label>
           <div>Id: {todo.id}</div>
 
           <form onKeyDown={(event) => handleSubmitUpdate(event, todo)}>
 
             <textarea
+              value={inputUpdate}
               placeholder={todo.text}
               onChange={handleChangeUpdate}
               className="updateInput"
@@ -81,7 +83,6 @@ function App() {
           </form>
           <button type="button" onClick={handleDeleteTodo} id={`${todo.id}`}>löschen</button>
         </li>
-
       ))}
     </div>
   )
