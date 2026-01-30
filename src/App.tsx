@@ -44,7 +44,6 @@ function App() {
           <div>Id: {todo.id}</div>
 
           <form>
-
             <textarea
               placeholder={todo.text}
               onChange={(event) => updateTodo({
@@ -63,7 +62,7 @@ function App() {
         </li>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default App;
