@@ -1,7 +1,8 @@
 import { atom } from "jotai";
+import { generateId } from "../utils/uuid";
 
 export interface ToDo {
-  id: number;
+  id: string;
   isChecked: boolean;
   text: string;
 }
@@ -9,7 +10,7 @@ export interface ToDo {
 export const todosAtom = atom<ToDo[]>([]);
 
 export const addTodoAtom = atom(null, (get, set, text: string) => {
-  const id = Date.now();
+  const id = generateId();
   const todo: ToDo = {
     id,
     text,
@@ -26,7 +27,7 @@ export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
   set(todosAtom, updatedTodos);
 });
 
-export const deleteTodoAtom = atom(null, (get, set, id: number) => {
+export const deleteTodoAtom = atom(null, (get, set, id: string) => {
   const todos = get(todosAtom);
   const deleted = todos.filter((todo) => todo.id !== id);
   set(todosAtom, deleted);
