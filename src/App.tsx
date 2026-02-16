@@ -1,6 +1,6 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { useState } from "react";
-import { addTodoAtom, deleteTodoAtom, todosAtom, updateTodoAtom } from "./store/todoStore";
+import { addTodoAtom, deleteTodoAtom, todosAtom, updateTodoAtom, category } from "./store/todoStore";
 import "./App.css";
 
 function App() {
@@ -10,9 +10,10 @@ function App() {
   const updateTodo = useSetAtom(updateTodoAtom);
 
   const [newTodoInput, setNewTodoInput] = useState("");
+  const [newCategory, setNewCategory] = useState("");
 
   const handleAddTodo = () => {
-    addTodo(newTodoInput);
+    addTodo(newTodoInput, newCategory);
     setNewTodoInput("");
   };
 
@@ -25,10 +26,16 @@ function App() {
         id="inputFeld"
         onChange={(event) => setNewTodoInput(event.target.value)}
       />
+      <p />
+      <select id="dropdown" onChange={(event) => setNewCategory(event.target.value)}>
+        {category.map((categories) => (
+          <option value={categories.name}>{categories.name}</option>
+        ))};
+      </select>
       <button type="button" onClick={handleAddTodo}>
         Hinzufügen
       </button>
-
+      <p />
       {todos.map((todo) => (
         <li key={todo.id}>
           <input
@@ -48,6 +55,7 @@ function App() {
           >
             {todo.text}
           </label>
+          <div>Kategorie: {todo.categoryId}</div>
           <div>Id: {todo.id}</div>
 
           <form>
@@ -63,10 +71,11 @@ function App() {
             />
           </form>
           <button type="button" onClick={() => deleteTodo(todo.id)} id={`${todo.id}`}>
-            löschen
+            Löschen
           </button>
         </li>
       ))}
+      <p />
     </div>
   );
 }
