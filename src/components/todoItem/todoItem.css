@@ -1,0 +1,61 @@
+.todoItem {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.todoText{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+/* Kategorien */
+.no_category {
+    color: #afb300;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    background: #fffede;
+}
+
+.health {
+    color: blue;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    background: #ddddff;
+}
+
+.work {
+    color: green;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    background: #dfffdf;
+}
+
+.mental_health {
+    color: purple;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    background: #fdebff;
+}
+
+.others {
+    color: grey;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    background: #f2f2f2;
+}
