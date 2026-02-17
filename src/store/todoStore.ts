@@ -3,7 +3,7 @@ import { generateId } from "../utils/uuid";
 
 export interface Category {
     id: string;
-    name: string;
+    label: string;
 }
 
 export interface ToDo {
@@ -14,11 +14,11 @@ export interface ToDo {
 }
 
 export const category: Category[] = [
-    { id: "0", name: "Keine Kategorie" },
-    { id: "1", name: "Health" },
-    { id: "2", name: "Work" },
-    { id: "3", name: "Mental Health" },
-    { id: "4", name: "Others" },
+    { id: "no_category", label: "No Category"},
+    { id: "health", label: "Health"},
+    { id: "work", label: "Work"},
+    { id: "mental_health", label: "Mental Health"},
+    { id: "others", label: "Others"},
 ]
 
 export const todosAtom = atom<ToDo[]>([]);
