@@ -1,0 +1,8 @@
+.addTodo {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+}
