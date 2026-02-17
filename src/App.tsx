@@ -1,81 +1,44 @@
-import { useAtomValue, useSetAtom } from "jotai";
-import { useState } from "react";
-import { addTodoAtom, deleteTodoAtom, todosAtom, updateTodoAtom, category } from "./store/todoStore";
+import { category } from "./store/todoStore";
+import { AddTodos } from "./components/addTodo/addTodo";
+import { ToDoList } from "./components/todoList/todoList";
 import "./App.css";
+import "./components/todoItem/todoItem.css";
 
 function App() {
-  const todos = useAtomValue(todosAtom);
-  const addTodo = useSetAtom(addTodoAtom);
-  const deleteTodo = useSetAtom(deleteTodoAtom);
-  const updateTodo = useSetAtom(updateTodoAtom);
 
-  const [newTodoInput, setNewTodoInput] = useState("");
-  const [newCategory, setNewCategory] = useState("");
-
-  const handleAddTodo = () => {
-    addTodo(newTodoInput, newCategory);
-    setNewTodoInput("");
-  };
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString('de-DE', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
 
   return (
     <div>
-      <input
-        value={newTodoInput}
-        type="text"
-        placeholder="Neue ToDo"
-        id="inputFeld"
-        onChange={(event) => setNewTodoInput(event.target.value)}
-      />
-      <p />
-      <select id="dropdown" onChange={(event) => setNewCategory(event.target.value)}>
-        {category.map((categories) => (
-          <option value={categories.name}>{categories.name}</option>
-        ))};
-      </select>
-      <button type="button" onClick={handleAddTodo}>
-        Hinzufügen
-      </button>
-      <p />
-      {todos.map((todo) => (
-        <li key={todo.id}>
-          <input
-            type="checkbox"
-            id={`${todo.id}`}
-            onClick={() =>
-              updateTodo({
-                ...todo,
-                isChecked: !todo.isChecked,
-              })
-            }
-          />
-          <label
-            htmlFor={`${todo.id}`}
-            id="textTodo"
-            style={{ textDecoration: todo.isChecked ? "line-through" : "none" }}
-          >
-            {todo.text}
-          </label>
-          <div>Kategorie: {todo.categoryId}</div>
-          <div>Id: {todo.id}</div>
+      <div className="headline">
+        <div className="headlineText">Tasks</div>
+        &nbsp;
+        <div className="headlineDate">{formattedDate}</div>
+      </div>
 
-          <form>
-            <textarea
-              placeholder={todo.text}
-              onChange={(event) =>
-                updateTodo({
-                  ...todo,
-                  text: event.target.value,
-                })
-              }
-              className="updateInput"
-            />
-          </form>
-          <button type="button" onClick={() => deleteTodo(todo.id)} id={`${todo.id}`}>
-            Löschen
-          </button>
-        </li>
-      ))}
-      <p />
+      {/* Kategorien - Kacheln */}
+      <div className="cards">
+        {category.map((categories) => (
+          <div className={categories.id}>
+            <div className="card" key={categories.id}>
+              <div className="count">0</div>
+              &nbsp;
+              <div className="text">{categories.label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <hr style={{ border: "1px solid #dedede" }} />
+
+      <AddTodos />
+      <hr style={{ border: "1px solid #dedede" }} />
+      <ToDoList />
+
     </div>
   );
 }
