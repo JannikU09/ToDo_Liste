@@ -1,10 +1,13 @@
-import { category } from "./store/todoStore";
+import { category, todosAtom } from "./store/todoStore";
 import { AddTodos } from "./components/addTodo/addTodo";
 import { ToDoList } from "./components/todoList/todoList";
 import "./App.css";
 import "./components/todoItem/todoItem.css";
+import { useAtomValue } from "jotai";
 
 function App() {
+  const todos = useAtomValue(todosAtom);
+
 
   const date = new Date();
   const formattedDate = date.toLocaleDateString('de-DE', {
@@ -23,18 +26,20 @@ function App() {
 
       {/* Kategorien - Kacheln */}
       <div className="cards">
-        {category.map((categories) => (
-          <div className={categories.id}>
-            <div className="card" key={categories.id}>
-              <div className="count">0</div>
-              &nbsp;
-              <div className="text">{categories.label}</div>
+        {category.map((categories) => {
+          const countOccurrences = todos.filter(todo => todo.categoryId === categories.id).length;
+          return (
+            <div className={categories.id} key={categories.id}>
+              <div className="card" >
+                <div className="count">{countOccurrences}</div>
+                &nbsp;
+                <div className="text">{categories.label}</div>
+              </div>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
       <hr style={{ border: "1px solid #dedede" }} />
-
       <AddTodos />
       <hr style={{ border: "1px solid #dedede" }} />
       <ToDoList />
