@@ -12,7 +12,7 @@ export const AddTodos = () => {
     const handleAddTodo = () => {
         addTodo(newTodoInput, newCategory);
         setNewTodoInput("");
-        
+
         //Value für die ausgewählte Kategorie
         setNewCategory("no_category");
         //Die Kategorie, die im Dropdown angezeigt wird.

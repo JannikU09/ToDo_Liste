@@ -2,9 +2,9 @@ import { ToDoItem } from "../todoItem/todoItem"
 import "./todoList.css"
 
 export const ToDoList = () => {
-    return(
+    return (
         <div className="todoList">
-            <ToDoItem/>
+            <ToDoItem />
         </div>
     )
 }
