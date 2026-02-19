@@ -14,11 +14,11 @@ export interface ToDo {
 }
 
 export const category: Category[] = [
-    { id: "no_category", label: "No Category"},
-    { id: "health", label: "Health"},
-    { id: "work", label: "Work"},
-    { id: "mental_health", label: "Mental Health"},
-    { id: "others", label: "Others"},
+    { id: "no_category", label: "No Category" },
+    { id: "health", label: "Health" },
+    { id: "work", label: "Work" },
+    { id: "mental_health", label: "Mental Health" },
+    { id: "others", label: "Others" },
 ]
 
 export const todosAtom = atom<ToDo[]>([]);
