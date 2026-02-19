@@ -17,7 +17,7 @@ export const AddTodos = () => {
         setNewCategory("no_category");
         //Die Kategorie, die im Dropdown angezeigt wird.
         const selectElement = document.getElementById("dropdown") as HTMLSelectElement;
-        selectElement.selectedIndex = 1;
+        selectElement.selectedIndex = 0;
     };
 
     return (
