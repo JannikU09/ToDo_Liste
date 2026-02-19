@@ -37,6 +37,8 @@
 
     .icon {
       display: flex;
+      align-items: center;
+      padding-bottom: 30px;
     }
 
     .count {
@@ -48,4 +50,11 @@
       color: #7a7a7a;
     }
   }
+}
+
+.positionText {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  right: 25px;
 }
