@@ -1,5 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { category, deleteTodoAtom, todosAtom, updateTodoAtom } from "../../store/todoStore";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import "./todoItem.css";
 
 
@@ -14,6 +16,7 @@ export const ToDoItem = () => {
         <div key={todo.id}>
           <div className="todoText">
             <input
+              className="checkbox"
               type="checkbox"
               id={`${todo.id}`}
               onClick={() =>
@@ -24,32 +27,26 @@ export const ToDoItem = () => {
               }
             />
             <div>
-              <div
-                id="textTodo"
-                style={{ textDecoration: todo.isChecked ? "line-through" : "none" }}
-              >
-                {todo.text}
-              </div>
+              <form>
+                <textarea
+                  className="updateInput"
+                  value={todo.text}
+                  onChange={(event) =>
+                    updateTodo({
+                      ...todo,
+                      text: event.target.value,
+                    })
+                  }
+                  style={{ textDecoration: todo.isChecked ? "line-through" : "none" }}
+                />
+              </form>
               <div className={todo.categoryId}>{category.find((categories) => categories.id === todo.categoryId)?.label}</div>
             </div>
+            <button className="deleteButton" type="button" onClick={() => deleteTodo(todo.id)} id={`${todo.id}`}>
+              <DeleteIcon />
+            </button>
           </div>
-
-          <form>
-            <textarea
-              placeholder={todo.text}
-              onChange={(event) =>
-                updateTodo({
-                  ...todo,
-                  text: event.target.value,
-                })
-              }
-              className="updateInput"
-            />
-          </form>
-          <button type="button" onClick={() => deleteTodo(todo.id)} id={`${todo.id}`}>
-            Löschen
-          </button>
-          <hr style={{ border: "0.75px solid #dedede" }} />
+          <hr style={{ border: "0.75px solid #dedede", width: "92.5vw" }} />
         </div>
       ))}
     </div>
