@@ -34,9 +34,11 @@ function App() {
                   <categories.icon />
                 </div>
                 &nbsp;
-                <div className="count">{countOccurrences}</div>
-                &nbsp;
-                <div className="text">{categories.label}</div>
+                <div className="positionText">
+                  <div className="count">{countOccurrences}</div>
+                  &nbsp;
+                  <div className="text">{categories.label}</div>
+                </div>
               </div>
             </div>
           )
