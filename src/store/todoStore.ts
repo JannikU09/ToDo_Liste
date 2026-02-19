@@ -1,9 +1,19 @@
 import { atom } from "jotai";
 import { generateId } from "../utils/uuid";
 
+//Icons
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import WorkIcon from "@mui/icons-material/Work";
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import FolderIcon from '@mui/icons-material/Folder';
+import NotInterestedIcon from '@mui/icons-material/NotInterested';
+
+
+
 export interface Category {
     id: string;
     label: string;
+    icon: any;
 }
 
 export interface ToDo {
@@ -14,11 +24,11 @@ export interface ToDo {
 }
 
 export const category: Category[] = [
-    { id: "no_category", label: "No Category" },
-    { id: "health", label: "Health" },
-    { id: "work", label: "Work" },
-    { id: "mental_health", label: "Mental Health" },
-    { id: "others", label: "Others" },
+    { id: "no_category", label: "No Category", icon: NotInterestedIcon },
+    { id: "health", label: "Health", icon: FavoriteIcon },
+    { id: "work", label: "Work", icon: WorkIcon },
+    { id: "mental_health", label: "Mental Health", icon: VolunteerActivismIcon },
+    { id: "others", label: "Others", icon: FolderIcon },
 ]
 
 export const todosAtom = atom<ToDo[]>([]);
