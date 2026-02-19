@@ -8,7 +8,6 @@ import { useAtomValue } from "jotai";
 function App() {
   const todos = useAtomValue(todosAtom);
 
-
   const date = new Date();
   const formattedDate = date.toLocaleDateString('de-DE', {
     day: '2-digit',
@@ -31,6 +30,10 @@ function App() {
           return (
             <div className={categories.id} key={categories.id}>
               <div className="card" >
+                <div className="icon">
+                  <categories.icon />
+                </div>
+                &nbsp;
                 <div className="count">{countOccurrences}</div>
                 &nbsp;
                 <div className="text">{categories.label}</div>
