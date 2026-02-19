@@ -11,7 +11,7 @@ export const AddTodos = () => {
 
     const handleAddTodo = () => {
         addTodo(newTodoInput, newCategory);
-        setNewCategory("");
+        setNewTodoInput("")
     };
 
     return (
@@ -26,6 +26,7 @@ export const AddTodos = () => {
             />
             
             <select id="dropdown" onChange={(event) => setNewCategory(event.target.value)}>
+                <option value="" disabled selected hidden>Bitte wählen...</option>
                 {category.map((categories) => (
                     <option key={categories.id} value={categories.id}>{categories.label}</option>
                 ))}
