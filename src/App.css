@@ -27,11 +27,17 @@
     font-size: 17px;
     text-align: center;
     width: 150px;
-    height: 90px;
+    height: 60px;
     border-radius: 15px;
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: flex-end;
     padding: 10px 12.5px;
+
+    .icon {
+      display: flex;
+    }
 
     .count {
       font-weight: bold;
