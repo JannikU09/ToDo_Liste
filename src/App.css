@@ -49,12 +49,12 @@
     .text {
       color: #7a7a7a;
     }
-  }
-}
 
-.positionText {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  right: 25px;
+    .positionText {
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      right: 25px;
+    }
+  }
 }
