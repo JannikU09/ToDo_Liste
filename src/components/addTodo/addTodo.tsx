@@ -7,11 +7,17 @@ export const AddTodos = () => {
     const addTodo = useSetAtom(addTodoAtom);
 
     const [newTodoInput, setNewTodoInput] = useState("");
-    const [newCategory, setNewCategory] = useState("");
+    const [newCategory, setNewCategory] = useState("no_category");
 
     const handleAddTodo = () => {
         addTodo(newTodoInput, newCategory);
-        setNewTodoInput("")
+        setNewTodoInput("");
+        
+        //Value für die ausgewählte Kategorie
+        setNewCategory("no_category");
+        //Die Kategorie, die im Dropdown angezeigt wird.
+        const selectElement = document.getElementById("dropdown") as HTMLSelectElement;
+        selectElement.selectedIndex = 1;
     };
 
     return (
@@ -24,9 +30,8 @@ export const AddTodos = () => {
                 id="inputFeld"
                 onChange={(event) => setNewTodoInput(event.target.value)}
             />
-            
+
             <select id="dropdown" onChange={(event) => setNewCategory(event.target.value)}>
-                <option value="" disabled selected hidden>Bitte wählen...</option>
                 {category.map((categories) => (
                     <option key={categories.id} value={categories.id}>{categories.label}</option>
                 ))}
