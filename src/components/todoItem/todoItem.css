@@ -1,6 +1,7 @@
 .updateInput {
-    width: 100px;
-    height: 15px;
+    min-width: 60px;
+    max-width: 375px;
+    field-sizing: content;
 }
 
 .todoItem {
