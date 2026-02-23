@@ -2,6 +2,7 @@ import { useSetAtom } from "jotai";
 import { useState } from "react";
 import { addTodoAtom, category } from "../../store/todoStore";
 import "./addTodo.css";
+import AddIcon from '@mui/icons-material/Add';
 
 export const AddTodos = () => {
     const addTodo = useSetAtom(addTodoAtom);
@@ -24,6 +25,7 @@ export const AddTodos = () => {
         <div className="addTodo">
             {/* Input für eine Neue ToDo */}
             <input
+                className="input"
                 value={newTodoInput}
                 type="text"
                 placeholder="Neue ToDo"
@@ -31,16 +33,19 @@ export const AddTodos = () => {
                 onChange={(event) => setNewTodoInput(event.target.value)}
             />
 
-            <select id="dropdown" onChange={(event) => setNewCategory(event.target.value)}>
+            <select
+                className="dropdown"
+                id="dropdown"
+                onChange={(event) => setNewCategory(event.target.value)}
+            >
                 {category.map((categories) => (
                     <option key={categories.id} value={categories.id}>{categories.label}</option>
                 ))}
             </select>
-            <button type="button" onClick={handleAddTodo}>
-                Hinzufügen
+            <button className="addButton" type="button" onClick={handleAddTodo}>
+                <AddIcon />
             </button>
 
         </div>
     )
-
 }
