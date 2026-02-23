@@ -1,0 +1,26 @@
+.addTodo {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+
+    .dropdown {
+        height: 25px;
+    }
+
+    .input {
+        height: 20px;
+    }
+
+    .addButton {
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        height: 27.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

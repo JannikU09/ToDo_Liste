@@ -1,3 +1,60 @@
-.updateInput {
-  width: 140px;
+.headline {
+  font-size: 24px;
+  text-align: center;
+  border-radius: 15px;
+  display: flex;
+  align-items: flex-end;
+
+  .headlineText {
+    font-weight: bold;
+  }
+
+  .headlineDate {
+    color: #7a7a7a;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
+
+  .card {
+    font-size: 17px;
+    text-align: center;
+    width: 150px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 10px 12.5px;
+
+    .icon {
+      display: flex;
+      align-items: center;
+      padding-bottom: 30px;
+    }
+
+    .count {
+      font-weight: bold;
+      color: black;
+    }
+
+    .text {
+      color: #7a7a7a;
+    }
+
+    .positionText {
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      right: 25px;
+    }
+  }
 }
