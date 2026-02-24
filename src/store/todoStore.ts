@@ -9,7 +9,6 @@ import FolderIcon from '@mui/icons-material/Folder';
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
 
 
-
 export interface Category {
     id: string;
     label: string;
@@ -31,7 +30,7 @@ export const category: Category[] = [
     { id: "others", label: "Others", icon: FolderIcon },
 ]
 
-export const todosAtom = atom<ToDo[]>([]);
+export const todosAtom = atom<ToDo[]>(JSON.parse(localStorage.getItem("Todos") ?? "[]") as ToDo[]);
 
 export const addTodoAtom = atom(null, (get, set, text: string, categoryId: string) => {
     const id = generateId();
@@ -42,6 +41,7 @@ export const addTodoAtom = atom(null, (get, set, text: string, categoryId: strin
         isChecked: false,
     };
 
+    localStorage.setItem("Todos", JSON.stringify([...get(todosAtom), todo]));
     set(todosAtom, [...get(todosAtom), todo]);
 });
 
@@ -49,11 +49,14 @@ export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
     const todos = get(todosAtom);
     const updatedTodos = todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo));
 
+    localStorage.setItem("Todos", JSON.stringify(updatedTodos));
     set(todosAtom, updatedTodos);
 });
 
 export const deleteTodoAtom = atom(null, (get, set, id: string) => {
     const todos = get(todosAtom);
     const deleted = todos.filter((todo) => todo.id !== id);
+
+    localStorage.setItem("Todos", JSON.stringify(deleted));
     set(todosAtom, deleted);
 });
