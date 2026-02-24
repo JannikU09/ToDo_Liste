@@ -4,7 +4,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./todoItem.css";
 
-
 export const ToDoItem = () => {
   const todos = useAtomValue(todosAtom);
   const deleteTodo = useSetAtom(deleteTodoAtom);
@@ -19,6 +18,7 @@ export const ToDoItem = () => {
               className="checkbox"
               type="checkbox"
               id={`${todo.id}`}
+              checked={todo.isChecked}
               onClick={() =>
                 updateTodo({
                   ...todo,
