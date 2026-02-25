@@ -19,7 +19,7 @@ export const ToDoItem = () => {
               type="checkbox"
               id={`${todo.id}`}
               checked={todo.isChecked}
-              onClick={() =>
+              onChange={() =>
                 updateTodo({
                   ...todo,
                   isChecked: !todo.isChecked,
