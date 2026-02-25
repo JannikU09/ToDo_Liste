@@ -1,9 +1,9 @@
 import { category, todosAtom } from "./store/todoStore";
 import { AddTodos } from "./components/addTodo/addTodo";
 import { ToDoList } from "./components/todoList/todoList";
-import "./App.css";
-import "./components/todoItem/todoItem.css";
 import { useAtomValue } from "jotai";
+import "@fontsource-variable/caveat";
+import "./App.css";
 
 function App() {
   const todos = useAtomValue(todosAtom);
