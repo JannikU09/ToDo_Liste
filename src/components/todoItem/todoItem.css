@@ -1,6 +1,10 @@
 .updateInput {
-    min-width: 60px;
+    font-family: "Caveat Variable", cursive;
+    font-size: 19px;
+    text-align: center;
+    min-width: 90px;
     max-width: 375px;
+    min-height: 20px;
     field-sizing: content;
 }
 
@@ -33,6 +37,11 @@
     justify-content: center;
     align-items: center;
     margin-top: 7.5px;
+}
+
+.categoryFont {
+    font-family: "Caveat Variable", cursive;
+    font-size: 18px;
 }
 
 /* Kategorien */
