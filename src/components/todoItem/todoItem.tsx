@@ -40,7 +40,9 @@ export const ToDoItem = () => {
                   style={{ textDecoration: todo.isChecked ? "line-through" : "none" }}
                 />
               </form>
-              <div className={todo.categoryId}>{category.find((categories) => categories.id === todo.categoryId)?.label}</div>
+              <div className="categoryFont">
+                <div className={todo.categoryId}>{category.find((categories) => categories.id === todo.categoryId)?.label}</div>
+              </div>
             </div>
             <button className="deleteButton" type="button" onClick={() => deleteTodo(todo.id)} id={`${todo.id}`}>
               <DeleteIcon />
