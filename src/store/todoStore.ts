@@ -42,16 +42,37 @@ export const addTodoAtom = atom(null, (get, set, text: string, categoryId: strin
         isChecked: false,
     };
 
-    todoStorage.add([...get(todosAtom), todo]);
+    try {
+        todoStorage.add([...get(todosAtom), todo]);
+        console.log("ToDo hinzugefügt")
+    } catch (error) {
+        console.error("Fehler: ", error);
+        return;
+    };
     set(todosAtom, [...get(todosAtom), todo]);
 });
 
 export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
-    const updatedTodos = todoStorage.update(updatedTodo);
+
+    let updatedTodos;
+    try {
+        updatedTodos = todoStorage.update(updatedTodo);
+        console.log("ToDo bearbeitet");
+    } catch (error) {
+        console.error("Fehler: ", error);
+        return;
+    };
     set(todosAtom, updatedTodos);
 });
 
 export const deleteTodoAtom = atom(null, (get, set, id: string) => {
-    const deleted = todoStorage.delete(id);
+    
+    let deleted;
+    try {
+        deleted = todoStorage.delete(id);
+    } catch (error) {
+        console.error("Fehler: ", error);
+        return;
+    };
     set(todosAtom, deleted);
 });
