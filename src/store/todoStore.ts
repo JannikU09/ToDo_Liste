@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { generateId } from "../utils/uuid";
+import { todoStorage } from "../utils/ls";
 
 //Icons
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -7,7 +8,6 @@ import WorkIcon from "@mui/icons-material/Work";
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import FolderIcon from '@mui/icons-material/Folder';
 import NotInterestedIcon from '@mui/icons-material/NotInterested';
-
 
 
 export interface Category {
@@ -31,7 +31,7 @@ export const category: Category[] = [
     { id: "others", label: "Others", icon: FolderIcon },
 ]
 
-export const todosAtom = atom<ToDo[]>([]);
+export const todosAtom = atom<ToDo[]>(todoStorage.load());
 
 export const addTodoAtom = atom(null, (get, set, text: string, categoryId: string) => {
     const id = generateId();
@@ -42,18 +42,37 @@ export const addTodoAtom = atom(null, (get, set, text: string, categoryId: strin
         isChecked: false,
     };
 
+    try {
+        todoStorage.add([...get(todosAtom), todo]);
+        console.log("ToDo hinzugefügt")
+    } catch (error) {
+        console.error("Fehler: ", error);
+        return;
+    };
     set(todosAtom, [...get(todosAtom), todo]);
 });
 
 export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
-    const todos = get(todosAtom);
-    const updatedTodos = todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo));
 
+    let updatedTodos;
+    try {
+        updatedTodos = todoStorage.update(updatedTodo);
+        console.log("ToDo bearbeitet");
+    } catch (error) {
+        console.error("Fehler: ", error);
+        return;
+    };
     set(todosAtom, updatedTodos);
 });
 
 export const deleteTodoAtom = atom(null, (get, set, id: string) => {
-    const todos = get(todosAtom);
-    const deleted = todos.filter((todo) => todo.id !== id);
+    
+    let deleted;
+    try {
+        deleted = todoStorage.delete(id);
+    } catch (error) {
+        console.error("Fehler: ", error);
+        return;
+    };
     set(todosAtom, deleted);
 });
