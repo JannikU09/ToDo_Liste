@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import { generateId } from "../utils/uuid";
+import { todoStorage } from "../utils/ls";
 
 //Icons
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -30,7 +31,7 @@ export const category: Category[] = [
     { id: "others", label: "Others", icon: FolderIcon },
 ]
 
-export const todosAtom = atom<ToDo[]>(JSON.parse(localStorage.getItem("Todos") ?? "[]") as ToDo[]);
+export const todosAtom = atom<ToDo[]>(todoStorage.load());
 
 export const addTodoAtom = atom(null, (get, set, text: string, categoryId: string) => {
     const id = generateId();
@@ -41,22 +42,16 @@ export const addTodoAtom = atom(null, (get, set, text: string, categoryId: strin
         isChecked: false,
     };
 
-    localStorage.setItem("Todos", JSON.stringify([...get(todosAtom), todo]));
+    todoStorage.add([...get(todosAtom), todo]);
     set(todosAtom, [...get(todosAtom), todo]);
 });
 
 export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
-    const todos = get(todosAtom);
-    const updatedTodos = todos.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo));
-
-    localStorage.setItem("Todos", JSON.stringify(updatedTodos));
+    const updatedTodos = todoStorage.update(updatedTodo);
     set(todosAtom, updatedTodos);
 });
 
 export const deleteTodoAtom = atom(null, (get, set, id: string) => {
-    const todos = get(todosAtom);
-    const deleted = todos.filter((todo) => todo.id !== id);
-
-    localStorage.setItem("Todos", JSON.stringify(deleted));
+    const deleted = todoStorage.delete(id);
     set(todosAtom, deleted);
 });
