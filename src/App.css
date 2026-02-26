@@ -1,5 +1,10 @@
-.headline {
+.font,
+textarea,
+input[type=text] {
   font-family: "Caveat Variable", cursive;
+}
+
+.headline {
   font-size: 34px;
   text-align: center;
   border-radius: 15px;
@@ -16,7 +21,6 @@
 }
 
 .cards {
-  font-family: "Caveat Variable";
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
