@@ -7,13 +7,11 @@
     padding: 10px;
 
     .dropdown {
-        font-family: "Caveat Variable", cursive;
         font-size: 14px;
         height: 25px;
     }
 
     .input {
-        font-family: "Caveat Variable", cursive;
         font-size: 18px;
         height: 20px;
     }
