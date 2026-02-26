@@ -1,4 +1,5 @@
 .font,
+select,
 textarea,
 input[type=text] {
   font-family: "Caveat Variable", cursive;
