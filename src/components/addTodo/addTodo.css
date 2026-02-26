@@ -7,10 +7,12 @@
     padding: 10px;
 
     .dropdown {
+        font-size: 15px;
         height: 25px;
     }
 
     .input {
+        font-size: 18px;
         height: 20px;
     }
 

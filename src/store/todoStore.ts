@@ -52,7 +52,7 @@ export const addTodoAtom = atom(null, (get, set, text: string, categoryId: strin
     set(todosAtom, [...get(todosAtom), todo]);
 });
 
-export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
+export const updateTodoAtom = atom(null, (_get, set, updatedTodo: ToDo) => {
 
     let updatedTodos;
     try {
@@ -65,8 +65,8 @@ export const updateTodoAtom = atom(null, (get, set, updatedTodo: ToDo) => {
     set(todosAtom, updatedTodos);
 });
 
-export const deleteTodoAtom = atom(null, (get, set, id: string) => {
-    
+export const deleteTodoAtom = atom(null, (_get, set, id: string) => {
+
     let deleted;
     try {
         deleted = todoStorage.delete(id);
