@@ -48,7 +48,6 @@ function App() {
       <AddTodos />
       <hr style={{ border: "1px solid #dedede" }} />
       <ToDoList />
-
     </div>
   );
 }
