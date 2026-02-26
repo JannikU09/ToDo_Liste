@@ -51,7 +51,7 @@ export const ToDoItem = () => {
               <DeleteIcon />
             </button>
           </div>
-          <hr style={{ border: "0.75px solid #dedede", width: "93vw" }} />
+          <hr style={{ border: "0.75px solid #dedede" }} />
         </div>
       ))}
     </div>
