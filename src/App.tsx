@@ -16,7 +16,7 @@ function App() {
   });
 
   return (
-    <div className="font">
+    <div>
       <div className="headline">
         <div className="headlineText">Tasks</div>
         &nbsp;
